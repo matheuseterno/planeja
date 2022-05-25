@@ -1,30 +1,22 @@
-package br.com.portifolio.planeja.model;
+package br.com.portifolio.planeja.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import br.com.portifolio.planeja.model.Receita;
 
-@Entity
-public class Receita {
+public class ReceitaDto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	private String descricao;
 	private BigDecimal valor;
 	private LocalDate data;
 	
-	public Receita() {
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
+	public ReceitaDto(Receita receita) {
+		this.descricao = receita.getDescricao();
+		this.data = receita.getData();
+		this.valor = receita.getValor();
 	}
 	public String getDescricao() {
 		return descricao;
@@ -45,6 +37,8 @@ public class Receita {
 		this.data = data;
 	}
 	
-	
+	public static List<ReceitaDto> converter(List<Receita> receitas) {
+		return receitas.stream().map(ReceitaDto::new).collect(Collectors.toList());
+	}
 
 }

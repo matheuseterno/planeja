@@ -9,5 +9,4 @@ public class PlanejaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PlanejaApplication.class, args);
 	}
-
 }
