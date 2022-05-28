@@ -21,9 +21,9 @@ public class ReceitaController {
 	private ReceitaRepository receitaRepository;
 	
 	@GetMapping("/receitas")
-	public List<Receita> lista() {
+	public List<ReceitaDto> lista() {
 		List<Receita> receitas = receitaRepository.findAll();
-		return receitas;
+		return ReceitaDto.converter(receitas);
 	}
 	
 	@GetMapping("/receitas/{id}")
