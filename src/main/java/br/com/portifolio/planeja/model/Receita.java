@@ -20,6 +20,12 @@ public class Receita {
 	
 	public Receita() {
 	}
+	public Receita(String descricao, String valor, String data) {
+		this.data = LocalDate.parse(data);
+		this.valor = BigDecimal.valueOf(Double.parseDouble(valor));
+		this.descricao = descricao;
+	}
+	
 	public Long getId() {
 		return id;
 	}

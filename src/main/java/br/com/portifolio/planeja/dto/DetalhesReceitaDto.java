@@ -7,24 +7,16 @@ import java.util.stream.Collectors;
 
 import br.com.portifolio.planeja.model.Receita;
 
-public class ReceitaDto {
+public class DetalhesReceitaDto {
 	
-	private Long id;
 	private String descricao;
 	private BigDecimal valor;
 	private LocalDate data;
 	
-	public ReceitaDto(Receita receita) {
-		this.id = receita.getId();
+	public DetalhesReceitaDto(Receita receita) {
 		this.descricao = receita.getDescricao();
 		this.data = receita.getData();
 		this.valor = receita.getValor();
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -45,7 +37,8 @@ public class ReceitaDto {
 		this.data = data;
 	}
 	
-	public static List<ReceitaDto> converter(List<Receita> receitas) {
-		return receitas.stream().map(ReceitaDto::new).collect(Collectors.toList());
+	public static List<DetalhesReceitaDto> converter(List<Receita> receitas) {
+		return receitas.stream().map(DetalhesReceitaDto::new).collect(Collectors.toList());
 	}
+
 }

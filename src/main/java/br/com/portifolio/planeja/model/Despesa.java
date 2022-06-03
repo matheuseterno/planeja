@@ -18,6 +18,13 @@ public class Despesa {
 	private BigDecimal valor;
 	private LocalDate data;
 	
+	public Despesa() {
+	}
+	public Despesa(String descricao, String valor, String data) {
+		this.descricao = descricao;
+		this.valor = BigDecimal.valueOf(Double.parseDouble(valor));
+		this.data = LocalDate.parse(data);
+	}
 	public Long getId() {
 		return id;
 	}

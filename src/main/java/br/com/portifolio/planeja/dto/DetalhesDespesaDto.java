@@ -4,28 +4,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import br.com.portifolio.planeja.model.Despesa;
 
-public class DespesaDto {
+public class DetalhesDespesaDto {
 	
-	private Long id;
 	private String descricao;
 	private LocalDate data;
 	private BigDecimal valor;
 	
-	public DespesaDto(Despesa despesa) {
-		this.id = despesa.getId();
-		this.descricao = despesa.getDescricao();
+	public DetalhesDespesaDto(Despesa despesa) {
 		this.data = despesa.getData();
+		this.descricao = despesa.getDescricao();
 		this.valor = despesa.getValor();
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -45,7 +36,9 @@ public class DespesaDto {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	public static List<DespesaDto> converter(List<Despesa> despesa) {
-		return despesa.stream().map(DespesaDto::new).collect(Collectors.toList());
+	public static List<DetalhesDespesaDto> converter(List<Despesa> despesa) {
+		return despesa.stream().map(DetalhesDespesaDto::new).collect(Collectors.toList());
 	}
+	
+
 }
