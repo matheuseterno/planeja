@@ -1,14 +1,17 @@
 package br.com.portifolio.planeja.form;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 import br.com.portifolio.planeja.model.Receita;
 
 public class ReceitaForm {
-
+	
+	@NotNull @NotEmpty @Length(min = 5)
 	private String descricao;
+	@NotNull @NotEmpty
 	private String valor;
+	@NotNull @NotEmpty
 	private String data;
 
 	public String getDescricao() {

@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +45,7 @@ public class ReceitaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ReceitaDto> cadastrar(@RequestBody ReceitaForm receitaForm, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<ReceitaDto> cadastrar(@RequestBody @Valid ReceitaForm receitaForm, UriComponentsBuilder uriBuilder){
 		Receita receita = receitaForm.converter();
 		receitaRepository.save(receita);
 		
