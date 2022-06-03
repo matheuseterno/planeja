@@ -4,11 +4,13 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,11 +48,22 @@ public class DespesaController {
 	}
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<DespesaDto> cadastrar(@RequestBody @Valid DespesaForm despesaForm, UriComponentsBuilder uriBuilder){
 		Despesa despesa = despesaForm.converter();
 		despesaRepository.save(despesa);
 		
 		URI uri = uriBuilder.path("/despesas/{id}").buildAndExpand(despesa.getId()).toUri();
 		return ResponseEntity.created(uri).body(new DespesaDto(despesa));
+	}
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> deletar(@PathVariable Long id){
+		 Optional<Despesa> despesa = despesaRepository.findById(id);
+		if(despesa.isPresent()) {
+			despesaRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
 	}
 }
